@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "fcj-book-shop"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-x5vtpwoj54oy"
+s3_prefix = "fcj-book-shop"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+resolve_s3 = true
