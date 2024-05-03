@@ -12,21 +12,21 @@
     <title>Create DELETE API :: SERVERLESS - DEPLOYING APPLICATIONS WITH SAM</title>
 
     
-    <link href="/css/nucleus.css?1714651119" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714651119" rel="stylesheet">
-    <link href="/css/hybrid.css?1714651119" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714651119" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714651119" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714651119" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714651119" rel="stylesheet">
-    <link href="/css/theme.css?1714651119" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714651119" rel="stylesheet">
+    <link href="/css/nucleus.css?1714700383" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714700383" rel="stylesheet">
+    <link href="/css/hybrid.css?1714700383" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714700383" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714700383" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714700383" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714700383" rel="stylesheet">
+    <link href="/css/theme.css?1714700383" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714700383" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1714651119" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1714700383" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1714651119"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714700383"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714651119"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714651119"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714700383"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714700383"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714651119"></script>
+<script type="text/javascript" src="/js/search.js?1714700383"></script>
 
     
   </div>
@@ -725,9 +725,11 @@
 
 
 	<ol>
-<li>Open <strong>template.yaml</strong> file in <strong>fcj-book-store</strong> folder</li>
-<li>Add the following script at the end of the file that create the DELETE method</li>
-</ol>
+<li>
+<p>Open <strong>template.yaml</strong> file in <strong>fcj-book-shop</strong> folder</p>
+</li>
+<li>
+<p>Add the following script at the end of the file that create the DELETE method</p>
 <pre tabindex="0"><code>          /books/{id}:
             delete:
               responses:
@@ -747,7 +749,7 @@
                 passthroughBehavior: when_no_match
                 httpMethod: POST #always POST
                 type: aws_proxy
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-15.png?featherlight=false&width=90pc"></p>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/67.png?&width=90pc"></p>
 <ul>
 <li>Add the following script at the end of the <strong>BookDelete</strong> function</li>
 </ul>
@@ -759,63 +761,64 @@
             Method: delete
             RestApiId:
               Ref: BookApi
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-16.png?featherlight=false&width=90pc"></p>
-<ol start="2">
-<li>Run the following command to deploy SAM</li>
-</ol>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/68.png?&width=90pc"></p>
+</li>
+<li>
+<p>Run the following command to deploy SAM</p>
 <pre tabindex="0"><code>sam build
 sam deploy --guided
-</code></pre>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/72.png?&width=90pc">
+
 <div class="notices note" ><p>Enter &ldquo;y&rdquo; if asked &ldquo;BookDelete may not have authorization defined, Is this okay? [y/N]: &quot;</p>
 </div>
-
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-17.png?featherlight=false&width=90pc"></p>
-<ol start="3">
-<li>Open <strong>book_delete</strong> function console</li>
-</ol>
+</p>
+</li>
+<li>
+<p>Open <strong>book_delete</strong> function console</p>
 <ul>
-<li>Click <strong>API Gateway</strong></li>
+<li>Click <strong>API Gateway</strong>
+<img alt="CreatePostAPI" src="/images/1/69.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-18.png?featherlight=false&width=90pc"></p>
-<ol start="4">
-<li>Show API Gateway being interacted with this function</li>
-</ol>
+</li>
+<li>
+<p>Show API Gateway being interacted with this function</p>
 <ul>
 <li>Click this API Gateway</li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-19.png?featherlight=false&width=90pc"></p>
-<ol start="5">
-<li>Display the resources and DELETE method</li>
-</ol>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-20.png?featherlight=false&width=90pc"></p>
-<ol start="6">
-<li>Click <strong>Stages</strong> on the left menu</li>
-</ol>
+</li>
+<li>
+<p>Display the resources and DELETE method
+<img alt="CreatePostAPI" src="/images/1/70.png?&width=90pc"></p>
+</li>
+<li>
+<p>Click <strong>Stages</strong> on the left menu</p>
 <ul>
 <li>Click <strong>staging</strong></li>
 <li>Click <strong>DELTE</strong></li>
-<li>Record the <strong>InvokeURL</strong> of DELETE method</li>
+<li>Record the <strong>InvokeURL</strong> of DELETE method
+<img alt="CreatePostAPI" src="/images/1/71.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-21.png?featherlight=false&width=90pc"></p>
-<ol start="7">
-<li>Add the following script at the end of the <strong>template.yaml</strong> file to API can support Binary Media Types files</li>
-</ol>
+</li>
+<li>
+<p>Add the following script at the end of the <strong>template.yaml</strong> file to API can support Binary Media Types files</p>
 <pre tabindex="0"><code>      BinaryMediaTypes: 
         - multipart~1form-data
-</code></pre><ol start="8">
-<li>Run the following command to deploy SAM</li>
-</ol>
+</code></pre></li>
+<li>
+<p>Run the following command to deploy SAM</p>
 <pre tabindex="0"><code>sam build
 sam deploy --guided
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-22.png?featherlight=false&width=90pc"></p>
-<ol start="9">
-<li>Back to API console</li>
-</ol>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/73.png?&width=90pc"></p>
+</li>
+<li>
+<p>Back to API console</p>
 <ul>
 <li>Select <strong>Settings</strong> on the left menu</li>
-<li>Scroll down, check if <strong>multipart/form-data</strong> has been added under <strong>Binary Meida Types</strong></li>
+<li>Scroll down, check if <strong>multipart/form-data</strong> has been added under <strong>Binary Meida Types</strong>
+<img alt="CreatePostAPI" src="/images/1/74.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-23.png?featherlight=false&width=90pc"></p>
+</li>
+</ol>
 
 
 
@@ -1146,19 +1149,19 @@ sam deploy --guided
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714651119"></script>
-    <script src="/js/jquery.sticky.js?1714651119"></script>
-    <script src="/js/featherlight.min.js?1714651119"></script>
-    <script src="/js/highlight.pack.js?1714651119"></script>
+    <script src="/js/clipboard.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714700383"></script>
+    <script src="/js/jquery.sticky.js?1714700383"></script>
+    <script src="/js/featherlight.min.js?1714700383"></script>
+    <script src="/js/highlight.pack.js?1714700383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714651119"></script>
-    <script src="/js/learn.js?1714651119"></script>
-    <script src="/js/hugo-learn.js?1714651119"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714700383"></script>
+    <script src="/js/learn.js?1714700383"></script>
+    <script src="/js/hugo-learn.js?1714700383"></script>
 
-    <link href="/mermaid/mermaid.css?1714651119" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1714651119"></script>
+    <link href="/mermaid/mermaid.css?1714700383" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1714700383"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

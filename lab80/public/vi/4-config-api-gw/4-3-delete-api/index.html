@@ -12,21 +12,21 @@
     <title>Tạo DELETE API :: SERVERLESS - TRIỂN KHAI ỨNG DỤNG TRÊN SAM</title>
 
     
-    <link href="/css/nucleus.css?1714651119" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714651119" rel="stylesheet">
-    <link href="/css/hybrid.css?1714651119" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714651119" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714651119" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714651119" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714651119" rel="stylesheet">
-    <link href="/css/theme.css?1714651119" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714651119" rel="stylesheet">
+    <link href="/css/nucleus.css?1714700383" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714700383" rel="stylesheet">
+    <link href="/css/hybrid.css?1714700383" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714700383" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714700383" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714700383" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714700383" rel="stylesheet">
+    <link href="/css/theme.css?1714700383" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714700383" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1714651119" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1714700383" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1714651119"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714700383"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714651119"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714651119"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714700383"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714700383"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714651119"></script>
+<script type="text/javascript" src="/js/search.js?1714700383"></script>
 
     
   </div>
@@ -725,9 +725,8 @@
 
 
 	<ol>
-<li>Mở tệp <strong>template.yaml</strong> trong thư mục <strong>fcj-book-store</strong></li>
-<li>Thêm đoạn script sau vào cuối tệp tạo một method DELETE</li>
-</ol>
+<li>Mở tệp <strong>template.yaml</strong> trong thư mục <strong>fcj-book-shop</strong></li>
+<li>Thêm đoạn script sau vào cuối tệp tạo một method DELETE
 <pre tabindex="0"><code>          /books/{id}:
             delete:
               responses:
@@ -747,10 +746,10 @@
                 passthroughBehavior: when_no_match
                 httpMethod: POST #always POST
                 type: aws_proxy
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-15.png?featherlight=false&width=90pc"></p>
+</code></pre><img alt="CreatePostAPI" src="/images/1/67.png?&width=90pc"></li>
+</ol>
 <ul>
-<li>Thêm đoạn script sau vào cuối của function <strong>BookDelete</strong></li>
-</ul>
+<li>Thêm đoạn script sau vào cuối của function <strong>BookDelete</strong>
 <pre tabindex="0"><code>      Events:
         DeleteBook:
           Type: Api
@@ -759,63 +758,65 @@
             Method: delete
             RestApiId:
               Ref: BookApi
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-16.png?featherlight=false&width=90pc"></p>
+</code></pre><img alt="CreatePostAPI" src="/images/1/68.png?&width=90pc"></li>
+</ul>
 <ol start="2">
-<li>Chạy dòng lệnh dưới đây triển khai SAM</li>
-</ol>
+<li>
+<p>Chạy dòng lệnh dưới đây triển khai SAM</p>
 <pre tabindex="0"><code>sam build
 sam deploy --guided
-</code></pre>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/72.png?&width=90pc">
+
 <div class="notices note" ><p>Nhập &ldquo;y&rdquo; nếu được hỏi &ldquo;BookDelete may not have authorization defined, Is this okay? [y/N]: &quot;</p>
 </div>
-
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-17.png?featherlight=false&width=90pc"></p>
-<ol start="3">
-<li>Mở bảng điều khiển của function <strong>book_delete</strong></li>
-</ol>
+</p>
+</li>
+<li>
+<p>Mở bảng điều khiển của function <strong>book_delete</strong></p>
 <ul>
-<li>Ấn vào <strong>API Gateway</strong></li>
+<li>Ấn vào <strong>API Gateway</strong>
+<img alt="CreatePostAPI" src="/images/1/69.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-18.png?featherlight=false&width=90pc"></p>
-<ol start="4">
-<li>Hiện thị API Gateway đang được tương tác với function</li>
-</ol>
+</li>
+<li>
+<p>Hiện thị API Gateway đang được tương tác với function</p>
 <ul>
 <li>Ấn vào API Gateway đó</li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-19.png?featherlight=false&width=90pc"></p>
-<ol start="5">
-<li>Hiện thị các resource và method DELETE</li>
-</ol>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-20.png?featherlight=false&width=90pc"></p>
-<ol start="6">
-<li>Chọn tab <strong>Stages</strong> ở menu phía bên trái</li>
-</ol>
+</li>
+<li>
+<p>Hiện thị các resource và method DELETE
+<img alt="CreatePostAPI" src="/images/1/70.png?&width=90pc"></p>
+</li>
+<li>
+<p>Chọn tab <strong>Stages</strong> ở menu phía bên trái</p>
 <ul>
 <li>Ấn chọn <strong>staging</strong></li>
 <li>Ấn chọn <strong>DELTE</strong></li>
-<li>Ghi lại <strong>InvokeURL</strong> của method DELETE</li>
+<li>Ghi lại <strong>InvokeURL</strong> của method DELETE
+<img alt="CreatePostAPI" src="/images/1/71.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-21.png?featherlight=false&width=90pc"></p>
-<ol start="7">
-<li>Thêm đoạn script sau vào cuối tệp <strong>template.yaml</strong> để API hỗ trợ các tệp Binary Media Types</li>
-</ol>
+</li>
+<li>
+<p>Thêm đoạn script sau vào cuối tệp <strong>template.yaml</strong> để API hỗ trợ các tệp Binary Media Types</p>
 <pre tabindex="0"><code>      BinaryMediaTypes: 
         - multipart~1form-data
-</code></pre><ol start="8">
-<li>Chạy dòng lệnh dưới đây triển khai SAM</li>
-</ol>
+</code></pre></li>
+<li>
+<p>Chạy dòng lệnh dưới đây triển khai SAM</p>
 <pre tabindex="0"><code>sam build
 sam deploy --guided
-</code></pre><p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-22.png?featherlight=false&width=90pc"></p>
-<ol start="9">
-<li>Trở lại với bảng điều khiển của API</li>
-</ol>
+</code></pre><p><img alt="CreatePostAPI" src="/images/1/73.png?&width=90pc"></p>
+</li>
+<li>
+<p>Trở lại với bảng điều khiển của API</p>
 <ul>
 <li>Chọn <strong>Settings</strong> ở menu phía bên trái</li>
-<li>Kéo xuống dưới, kiểm tra xem <strong>multipart/form-data</strong> đã được thêm hay chưa trong phần <strong>Binary Meida Types</strong></li>
+<li>Kéo xuống dưới, kiểm tra xem <strong>multipart/form-data</strong> đã được thêm hay chưa trong phần <strong>Binary Meida Types</strong>
+<img alt="CreatePostAPI" src="/images/1/74.png?&width=90pc"></li>
 </ul>
-<p><img alt="CreateDeleteAPI" src="/images/4-config-api-gw/4-config-api-gw-23.png?featherlight=false&width=90pc"></p>
+</li>
+</ol>
 
 
 
@@ -1146,19 +1147,19 @@ sam deploy --guided
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714651119"></script>
-    <script src="/js/jquery.sticky.js?1714651119"></script>
-    <script src="/js/featherlight.min.js?1714651119"></script>
-    <script src="/js/highlight.pack.js?1714651119"></script>
+    <script src="/js/clipboard.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714700383"></script>
+    <script src="/js/jquery.sticky.js?1714700383"></script>
+    <script src="/js/featherlight.min.js?1714700383"></script>
+    <script src="/js/highlight.pack.js?1714700383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714651119"></script>
-    <script src="/js/learn.js?1714651119"></script>
-    <script src="/js/hugo-learn.js?1714651119"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714700383"></script>
+    <script src="/js/learn.js?1714700383"></script>
+    <script src="/js/hugo-learn.js?1714700383"></script>
 
-    <link href="/mermaid/mermaid.css?1714651119" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1714651119"></script>
+    <link href="/mermaid/mermaid.css?1714700383" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1714700383"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

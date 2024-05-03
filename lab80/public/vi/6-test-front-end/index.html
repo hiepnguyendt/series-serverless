@@ -12,21 +12,21 @@
     <title>Kiểm tra API với front-end :: SERVERLESS - TRIỂN KHAI ỨNG DỤNG TRÊN SAM</title>
 
     
-    <link href="/css/nucleus.css?1714651119" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714651119" rel="stylesheet">
-    <link href="/css/hybrid.css?1714651119" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714651119" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714651119" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714651119" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714651119" rel="stylesheet">
-    <link href="/css/theme.css?1714651119" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714651119" rel="stylesheet">
+    <link href="/css/nucleus.css?1714700383" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714700383" rel="stylesheet">
+    <link href="/css/hybrid.css?1714700383" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714700383" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714700383" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714700383" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714700383" rel="stylesheet">
+    <link href="/css/theme.css?1714700383" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714700383" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1714651119" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1714700383" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1714651119"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714700383"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714651119"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714651119"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714700383"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714700383"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714651119"></script>
+<script type="text/javascript" src="/js/search.js?1714700383"></script>
 
     
   </div>
@@ -720,85 +720,99 @@
 
 	<p>Sau khi kiểm tra các API hoạt động đúng với Postman, chúng ta sẽ kiểm tra các API được gọi với front-end xây dựng từ bước 2.</p>
 <ol>
-<li>Mở tệp <strong>config.js</strong> trong thư mục <strong>fcj-serverless-frontend</strong> đã được tải về từ phần 2</li>
-</ol>
+<li>
+<p>Mở tệp <strong>config.js</strong> trong thư mục <strong>fcj-serverless-frontend</strong> đã được tải về từ phần 2</p>
 <ul>
-<li>Thay giá trị cho <strong>APP_API_URL</strong> bằng URL của bạn:</li>
+<li>Thay giá trị cho <strong>APP_API_URL</strong> bằng URL của bạn:
+<img alt="CreateRestAPI" src="/images/1/86.png?width=90pc">
+<img alt="CreateRestAPI" src="/images/1/87.png?width=90pc"></li>
 </ul>
-<p><img alt="CreateRestAPI" src="/images/6-test-front-end/6-test-front-end-0.png?featherlight=false&width=90pc"></p>
-<p><img alt="UpdateURL" src="/images/6-test-front-end/6-test-front-end-1.png?featherlight=false&width=90pc"></p>
-<ol start="2">
-<li>Mở tệp <strong>App.js</strong> trong thư mục <strong>fcj-serverless-frontend/src/</strong>, sửa giá trị của biến <strong>isAdmin</strong> thành <strong>true</strong></li>
-<li>Chạy các dòng lệnh dưới đây:</li>
-</ol>
+</li>
+<li>
+<p>Mở tệp <strong>App.js</strong> trong thư mục <strong>fcj-serverless-frontend/src/</strong>, sửa giá trị của biến <strong>isAdmin</strong> thành <strong>true</strong></p>
+</li>
+<li>
+<p>Chạy các dòng lệnh dưới đây:</p>
 <pre tabindex="0"><code>yarn build
 aws s3 cp build s3://fcj-book-store --recursive
-</code></pre><ol start="4">
-<li>Dán endpoint của S3 static web vào browser của bạn. Ứng dụng đã hiện thông tin sách, nhưng vẫn chưa có ảnh vì chúng ta chưa tải ảnh lên.</li>
+</code></pre></li>
+<li>
+<p>Dán endpoint của S3 static web vào browser của bạn. Ứng dụng đã hiện thông tin sách, nhưng vẫn chưa có ảnh vì chúng ta chưa tải ảnh lên.
+<img alt="CreateRestAPI" src="/images/1/88.png?width=90pc"></p>
+</li>
 </ol>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-2.png?featherlight=false&width=90pc"></p>
 <p>Vậy API đọc dữ liệu đã hoạt động đúng.</p>
 <ol start="5">
-<li>Kiểm tra API ghi dữ liệu:</li>
+<li>Kiểm tra API ghi dữ liệu:
+<ul>
+<li>
+<p>Ấn sang tab <strong>Management</strong></p>
+</li>
+<li>
+<p>Ấn nút <strong>Update</strong>
+<img alt="CreateRestAPI" src="/images/1/89.png?width=90pc"></p>
+</li>
+<li>
+<p>Sửa bất kỳ thông tin gì bạn muốn trừ <strong>id</strong></p>
+</li>
+<li>
+<p>Ấn nút <strong>Choose image</strong></p>
+</li>
+<li>
+<p>Đưa ảnh dưới đây tải lên bucket:
+
+    <section class="attachments ">
+    	<label>
+    		<i class="fas fa-paperclip" aria-hidden="true"></i>
+    		Image
+    	</label>
+    	
+    		
+    	
+    	<div class="attachments-files">
+    	
+    		
+    		
+    			
+    		
+    	
+    		
+    		
+    			
+    				<li>
+    					<a href="/6-test-front-end/_index.vi.files/DockerInAction.jpeg" >
+    						DockerInAction.jpeg
+    					</a>
+    					(33 ko)
+    				</li>
+    			
+    		
+    	
+    		
+    		
+    			
+    		
+    	
+    	<div>
+    	
+    </section>
+    
+</p>
+</li>
+<li>
+<p>Ấn nút <strong>Update</strong></p>
+</li>
+<li>
+<p>Ấn nút <strong>OK</strong>
+<img alt="CreateRestAPI" src="/images/1/90.png?width=90pc"></p>
+</li>
+</ul>
+</li>
 </ol>
 <ul>
-<li>Ấn sang tab <strong>Management</strong></li>
-<li>Ấn nút <strong>Update</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-3.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Sửa bất kỳ thông tin gì bạn muốn trừ <strong>id</strong></li>
-<li>Ấn nút <strong>Choose image</strong></li>
-<li>Đưa ảnh dưới đây tải lên bucket:
-
-<section class="attachments ">
-	<label>
-		<i class="fas fa-paperclip" aria-hidden="true"></i>
-		Image
-	</label>
-	
-		
-	
-	<div class="attachments-files">
-	
-		
-		
-			
-		
-	
-		
-		
-			
-				<li>
-					<a href="/6-test-front-end/_index.vi.files/DockerInAction.jpeg" >
-						DockerInAction.jpeg
-					</a>
-					(33 ko)
-				</li>
-			
-		
-	
-		
-		
-			
-		
-	
-	<div>
-	
-</section>
-
-</li>
-<li>Ấn nút <strong>Update</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-4.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ấn nút <strong>OK</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-5.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ảnh và thông tin được cập nhật</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-6.png?featherlight=false&width=90pc"></p>
+<li>
+<p>Ảnh và thông tin được cập nhật
+<img alt="CreateRestAPI" src="/images/1/91.png?width=90pc"></p>
 <ul>
 <li>Ấn sang tab <strong>Create new book</strong> ghi dữ liệu mới vào cơ sở dữ liệu</li>
 <li>Nhập id bằng <code>5</code></li>
@@ -806,83 +820,83 @@ aws s3 cp build s3://fcj-book-store --recursive
 <li>Nhập tác giả: <code>Andreas Wittig</code></li>
 <li>Nhập thể loại: <code>IT</code></li>
 <li>Nhập giá: <code>59.99</code></li>
-<li>Nhập mô tả: <code>Amazon Web Services in Action, Second Edition is a comprehensive introduction to computing, storing, and networking in the AWS cloud. You'll find clear, relevant coverage of all the essential AWS services you to know, emphasizing best practices for security, high availability and scalability.</code></li>
+<li>Nhập mô tả:
+<pre tabindex="0"><code>Amazon Web Services in Action, Second Edition is a comprehensive introduction to computing, storing, and networking in the AWS cloud. You&#39;ll find clear, relevant coverage of all the essential AWS services you to know, emphasizing best practices for security, high availability and scalability.
+</code></pre></li>
 </ul>
 
-<section class="attachments ">
-	<label>
-		<i class="fas fa-paperclip" aria-hidden="true"></i>
-		Image
-	</label>
-	
-		
-	
-	<div class="attachments-files">
-	
-		
-		
-			
-		
-	
-		
-		
-			
-		
-	
-		
-		
-			
-				<li>
-					<a href="/6-test-front-end/_index.vi.files/aws.jpg" >
-						aws.jpg
-					</a>
-					(24 ko)
-				</li>
-			
-		
-	
-	<div>
-	
-</section>
-
+    <section class="attachments ">
+    	<label>
+    		<i class="fas fa-paperclip" aria-hidden="true"></i>
+    		Image
+    	</label>
+    	
+    		
+    	
+    	<div class="attachments-files">
+    	
+    		
+    		
+    			
+    		
+    	
+    		
+    		
+    			
+    		
+    	
+    		
+    		
+    			
+    				<li>
+    					<a href="/6-test-front-end/_index.vi.files/aws.jpg" >
+    						aws.jpg
+    					</a>
+    					(24 ko)
+    				</li>
+    			
+    		
+    	
+    	<div>
+    	
+    </section>
+    
 
 <ul>
 <li>Ấn nút <strong>Choose File</strong> để tải ảnh lên</li>
 <li>Ấn nút <strong>Create</strong></li>
+<li>Ấn nút <strong>OK</strong>
+<img alt="CreateRestAPI" src="/images/1/92.png?width=90pc"></li>
+<li>Hiển thị thông tin vừa tạo
+<img alt="CreateRestAPI" src="/images/1/93.png?width=90pc"></li>
 </ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-7.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ấn nút <strong>OK</strong></li>
+</li>
 </ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-8.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Hiển thị thông tin vừa tạo</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-9.png?featherlight=false&width=90pc"></p>
 <ol start="6">
-<li>Kiểm tra API xoá</li>
+<li>Kiểm tra API xoá
+<ul>
+<li>
+<p>Ấn sang tab <strong>Management</strong></p>
+</li>
+<li>
+<p>Ấn nút <strong>Update</strong>
+<img alt="CreateRestAPI" src="/images/1/94.png?width=90pc"></p>
+</li>
+<li>
+<p>Ấn nút <strong>Delete</strong>
+<img alt="CreateRestAPI" src="/images/1/95.png?width=90pc"></p>
+</li>
+<li>
+<p>Ấn nút <strong>OK</strong> để xác nhận xoá
+<img alt="CreateRestAPI" src="/images/1/96.png?width=90pc"></p>
+</li>
+<li>
+<p>Xem kết quả sau khi xoá: không còn xuất hiện thông tin sách nữa
+<img alt="CreateRestAPI" src="/images/1/97.png?width=90pc"></p>
+</li>
+</ul>
+</li>
 </ol>
-<ul>
-<li>Ấn sang tab <strong>Management</strong></li>
-<li>Ấn nút <strong>Update</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-10.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ấn nút <strong>Delete</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-11.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ấn nút <strong>OK</strong> để xác nhận xoá</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-12.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Ấn nút <strong>OK</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-13.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Xem kết quả sau khi xoá: không còn xuất hiện thông tin sách nữa</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-14.png?featherlight=false&width=90pc"></p>
 <p>Chúng ta đã hoàn thành việc xây dựng một ứng dụng web đơn giản theo mô hình serverless. Để xây dựng ứng dụng serverless nhanh hơn, trong phần tiếp theo chúng ta sẽ sử dụng AWS Serverless Application Model (SAM). SAM cung cấp cú pháp để diễn đạt các hàm, API, cơ sở dữ liệu và event source mappings.</p>
 
 
@@ -1210,19 +1224,19 @@ aws s3 cp build s3://fcj-book-store --recursive
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714651119"></script>
-    <script src="/js/jquery.sticky.js?1714651119"></script>
-    <script src="/js/featherlight.min.js?1714651119"></script>
-    <script src="/js/highlight.pack.js?1714651119"></script>
+    <script src="/js/clipboard.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714700383"></script>
+    <script src="/js/jquery.sticky.js?1714700383"></script>
+    <script src="/js/featherlight.min.js?1714700383"></script>
+    <script src="/js/highlight.pack.js?1714700383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714651119"></script>
-    <script src="/js/learn.js?1714651119"></script>
-    <script src="/js/hugo-learn.js?1714651119"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714700383"></script>
+    <script src="/js/learn.js?1714700383"></script>
+    <script src="/js/hugo-learn.js?1714700383"></script>
 
-    <link href="/mermaid/mermaid.css?1714651119" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1714651119"></script>
+    <link href="/mermaid/mermaid.css?1714700383" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1714700383"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

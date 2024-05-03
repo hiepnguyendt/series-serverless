@@ -12,21 +12,21 @@
     <title>Test APIs with front-end :: SERVERLESS - DEPLOYING APPLICATIONS WITH SAM</title>
 
     
-    <link href="/css/nucleus.css?1714651119" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714651119" rel="stylesheet">
-    <link href="/css/hybrid.css?1714651119" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714651119" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714651119" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714651119" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714651119" rel="stylesheet">
-    <link href="/css/theme.css?1714651119" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714651119" rel="stylesheet">
+    <link href="/css/nucleus.css?1714700383" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714700383" rel="stylesheet">
+    <link href="/css/hybrid.css?1714700383" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714700383" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714700383" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714700383" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714700383" rel="stylesheet">
+    <link href="/css/theme.css?1714700383" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714700383" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1714651119" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1714700383" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1714651119"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714700383"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714651119"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714651119"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714700383"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714700383"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714651119"></script>
+<script type="text/javascript" src="/js/search.js?1714700383"></script>
 
     
   </div>
@@ -720,159 +720,188 @@
 
 	<p>After testing that the APIs work properly with Postman, we will test the APIs that are called with the front-end built from part 2.</p>
 <ol>
-<li>Open <strong>config.js</strong> in <strong>fcj-serverless-frontend</strong> folder that downloaded from part 2</li>
-</ol>
+<li>
+<p>Open <strong>config.js</strong> in <strong>fcj-serverless-frontend</strong> folder that downloaded from part 2</p>
 <ul>
-<li>Change value of <strong>APP_API_URL</strong> with your URL:</li>
+<li>Change value of <strong>APP_API_URL</strong> with your URL:
+<img alt="CreateRestAPI" src="/images/1/86.png?width=90pc">
+<img alt="CreateRestAPI" src="/images/1/87.png?width=90pc"></li>
 </ul>
-<p><img alt="CreateRestAPI" src="/images/6-test-front-end/6-test-front-end-0.png?featherlight=false&width=90pc"></p>
-<p><img alt="UpdateURL" src="/images/6-test-front-end/6-test-front-end-1.png?featherlight=false&width=90pc"></p>
-<ol start="2">
-<li>Open <strong>App.js</strong> in <strong>fcj-serverless-frontend/src/</strong>, change value of <strong>isAdmin</strong> with <strong>true</strong></li>
-<li>Run the command lines under here:</li>
-</ol>
+</li>
+<li>
+<p>Open <strong>App.js</strong> in <strong>fcj-serverless-frontend/src/</strong>, change value of <strong>isAdmin</strong> with <strong>true</strong></p>
+</li>
+<li>
+<p>Run the command lines under here:</p>
 <pre tabindex="0"><code>yarn build
 aws s3 cp build s3://fcj-book-store --recursive
-</code></pre><ol start="4">
-<li>Paste the endpoint of S3 static web into your browser. The app already shows the book information, but still no pictures because we haven&rsquo;t uploaded the pictures yet.</li>
+</code></pre></li>
+<li>
+<p>Paste the endpoint of S3 static web into your browser. The app already shows the book information, but still no pictures because we haven&rsquo;t uploaded the pictures yet.
+<img alt="CreateRestAPI" src="/images/1/88.png?width=90pc"></p>
+</li>
 </ol>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-2.png?featherlight=false&width=90pc"></p>
 <p>So the listing API is working properly</p>
 <ol start="5">
-<li>Test writing API</li>
-</ol>
+<li>
+<p>Test writing API</p>
 <ul>
-<li>Click <strong>Management</strong> tab</li>
-<li>Click <strong>Update</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-3.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Edit whatever you want except <strong>id</strong></li>
-<li>Click <strong>Choose image</strong></li>
-<li>Upload the below image to the bucket:
+<li>
+<p>Click <strong>Management</strong> tab</p>
+</li>
+<li>
+<p>Click <strong>Update</strong>
+<img alt="CreateRestAPI" src="/images/1/89.png?width=90pc"></p>
+</li>
+<li>
+<p>Edit whatever you want except <strong>id</strong></p>
+</li>
+<li>
+<p>Click <strong>Choose image</strong></p>
+</li>
+<li>
+<p>Upload the below image to the bucket:
 
-<section class="attachments ">
-	<label>
-		<i class="fas fa-paperclip" aria-hidden="true"></i>
-		Image
-	</label>
-	
-		
-	
-	<div class="attachments-files">
-	
-		
-		
-			
-				<li>
-					<a href="/6-test-front-end/_index.files/DockerInAction.jpeg" >
-						DockerInAction.jpeg
-					</a>
-					(33 ko)
-				</li>
-			
-		
-	
-		
-		
-			
-		
-	
-	<div>
-	
-</section>
+    <section class="attachments ">
+    	<label>
+    		<i class="fas fa-paperclip" aria-hidden="true"></i>
+    		Image
+    	</label>
+    	
+    		
+    	
+    	<div class="attachments-files">
+    	
+    		
+    		
+    			
+    				<li>
+    					<a href="/6-test-front-end/_index.files/DockerInAction.jpeg" >
+    						DockerInAction.jpeg
+    					</a>
+    					(33 ko)
+    				</li>
+    			
+    		
+    	
+    		
+    		
+    			
+    		
+    	
+    	<div>
+    	
+    </section>
+    
+</p>
+</li>
+<li>
+<p>Click <strong>Update</strong></p>
+</li>
+<li>
+<p>Click <strong>OK</strong>
+<img alt="CreateRestAPI" src="/images/1/90.png?width=90pc"></p>
+</li>
+<li>
+<p>Image and information updated
+<img alt="CreateRestAPI" src="/images/1/91.png?width=90pc"></p>
+</li>
+<li>
+<p>Click on the <strong>Create new book</strong> tab to write new data to the database</p>
+</li>
+<li>
+<p>Enter id with <code>5</code></p>
+</li>
+<li>
+<p>Enter name: <code>Amazon Web Services in Action</code></p>
+</li>
+<li>
+<p>Enter the author: <code>Andreas Wittig</code></p>
+</li>
+<li>
+<p>Enter category: <code>IT</code></p>
+</li>
+<li>
+<p>Enter price: <code>59.99</code></p>
+</li>
+<li>
+<p>Enter a description:</p>
+<pre tabindex="0"><code>Amazon Web Services in Action, Second Edition is a comprehensive introduction to computing, storing, and networking in the AWS cloud. You&#39;ll find clear, relevant coverage of all the essential AWS services you to know, emphasizing best practices for security, high availability, and scalability.
+</code></pre>
+        <section class="attachments ">
+        	<label>
+        		<i class="fas fa-paperclip" aria-hidden="true"></i>
+        		Image
+        	</label>
+        	
+        		
+        	
+        	<div class="attachments-files">
+        	
+        		
+        		
+        			
+        		
+        	
+        		
+        		
+        			
+        				<li>
+        					<a href="/6-test-front-end/_index.files/aws.jpg" >
+        						aws.jpg
+        					</a>
+        					(24 ko)
+        				</li>
+        			
+        		
+        	
+        	<div>
+        	
+        </section>
+        
 
 </li>
-<li>Click <strong>Update</strong></li>
+<li>
+<p>Press the <strong>Choose File</strong> button to upload the image</p>
+</li>
+<li>
+<p>Press the <strong>Create</strong> button</p>
+</li>
+<li>
+<p>Click <strong>OK</strong>
+<img alt="CreateRestAPI" src="/images/1/92.png?width=90pc"></p>
+</li>
+<li>
+<p>Display newly created information
+<img alt="CreateRestAPI" src="/images/1/93.png?width=90pc"></p>
+</li>
 </ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-4.png?featherlight=false&width=90pc"></p>
+</li>
+<li>
+<p>Test the deleting API</p>
 <ul>
-<li>Click <strong>OK</strong></li>
+<li>
+<p>Click <strong>Management</strong> tab</p>
+</li>
+<li>
+<p>Click <strong>Update</strong>
+<img alt="CreateRestAPI" src="/images/1/94.png?width=90pc"></p>
+</li>
+<li>
+<p>Click <strong>Delete</strong>
+<img alt="CreateRestAPI" src="/images/1/95.png?width=90pc"></p>
+</li>
+<li>
+<p>Click <strong>OK</strong> to confirm delete
+<img alt="CreateRestAPI" src="/images/1/96.png?width=90pc"></p>
+</li>
+<li>
+<p>View results after deleting: no appearing book information
+<img alt="CreateRestAPI" src="/images/1/97.png?width=90pc"></p>
+</li>
 </ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-5.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Image and information updated</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-6.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Click on the <strong>Create new book</strong> tab to write new data to the database</li>
-<li>Enter id with <code>5</code></li>
-<li>Enter name: <code>Amazon Web Services in Action</code></li>
-<li>Enter the author: <code>Andreas Wittig</code></li>
-<li>Enter category: <code>IT</code></li>
-<li>Enter price: <code>59.99</code></li>
-<li>Enter a description: <code>Amazon Web Services in Action, Second Edition is a comprehensive introduction to computing, storing, and networking in the AWS cloud. You'll find clear, relevant coverage of all the essential AWS services you to know, emphasizing best practices for security, high availability, and scalability.</code></li>
-</ul>
-
-<section class="attachments ">
-	<label>
-		<i class="fas fa-paperclip" aria-hidden="true"></i>
-		Image
-	</label>
-	
-		
-	
-	<div class="attachments-files">
-	
-		
-		
-			
-		
-	
-		
-		
-			
-				<li>
-					<a href="/6-test-front-end/_index.files/aws.jpg" >
-						aws.jpg
-					</a>
-					(24 ko)
-				</li>
-			
-		
-	
-	<div>
-	
-</section>
-
-
-<ul>
-<li>Press the <strong>Choose File</strong> button to upload the image</li>
-<li>Press the <strong>Create</strong> button</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-7.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Click <strong>OK</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-8.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Display newly created information</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-9.png?featherlight=false&width=90pc"></p>
-<ol start="6">
-<li>Test the deleting API</li>
+</li>
 </ol>
-<ul>
-<li>Click <strong>Management</strong> tab</li>
-<li>Click <strong>Update</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-10.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Click <strong>Delete</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-11.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Click <strong>OK</strong> to confirm delete</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-12.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>Click <strong>OK</strong></li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-13.png?featherlight=false&width=90pc"></p>
-<ul>
-<li>View results after deleting: no appearing book information</li>
-</ul>
-<p><img alt="WebApp" src="/images/6-test-front-end/6-test-front-end-14.png?featherlight=false&width=90pc"></p>
 <p>We have finished building a simple SAM-based web application following the serverless model.</p>
 
 
@@ -1200,19 +1229,19 @@ aws s3 cp build s3://fcj-book-store --recursive
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714651119"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714651119"></script>
-    <script src="/js/jquery.sticky.js?1714651119"></script>
-    <script src="/js/featherlight.min.js?1714651119"></script>
-    <script src="/js/highlight.pack.js?1714651119"></script>
+    <script src="/js/clipboard.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714700383"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714700383"></script>
+    <script src="/js/jquery.sticky.js?1714700383"></script>
+    <script src="/js/featherlight.min.js?1714700383"></script>
+    <script src="/js/highlight.pack.js?1714700383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714651119"></script>
-    <script src="/js/learn.js?1714651119"></script>
-    <script src="/js/hugo-learn.js?1714651119"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714700383"></script>
+    <script src="/js/learn.js?1714700383"></script>
+    <script src="/js/hugo-learn.js?1714700383"></script>
 
-    <link href="/mermaid/mermaid.css?1714651119" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1714651119"></script>
+    <link href="/mermaid/mermaid.css?1714700383" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1714700383"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
