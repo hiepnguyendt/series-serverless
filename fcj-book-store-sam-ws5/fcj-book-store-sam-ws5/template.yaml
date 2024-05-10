@@ -1,0 +1,474 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  fcj-book-shop
+
+  Sample SAM Template for fcj-book-shop
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Parameters:
+  S3BookShopWebName:
+    Type: String
+    Default: fcj-book-shop
+  S3ImageShopName:
+    Type: String
+    Default: book-image-shop
+  S3ImageResizedName:
+    Type: String
+    Default: book-image-resize-shop
+
+Resources:
+  FcjBookShop:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      BucketName: !Ref S3BookShopWebName
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  FcjBookShopPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FcjBookShop
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Principal: "*"
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref FcjBookShop
+                - /*
+
+  BookImageShop:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3ImageShopName
+
+  BookImageResizeShop:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      BucketName: !Ref S3ImageResizedName
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+            AllowedOrigins:
+              - "*"
+
+  BooksTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Books
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: rv_id
+          AttributeType: N
+        - AttributeName: name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: rv_id
+          KeyType: RANGE
+      LocalSecondaryIndexes:
+        - IndexName: name-index
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: name
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  BooksList:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: fcj-book-shop/books_list
+      Handler: books_list.lambda_handler
+      Runtime: python3.9
+      FunctionName: books_list
+      Architectures:
+        - x86_64
+      Policies:
+        - Statement:
+            - Sid: ReadDynamoDB
+              Effect: Allow
+              Action:
+                - dynamodb:Scan
+                - dynamodb:Query
+              Resource:
+                - !GetAtt BooksTable.Arn
+      Events:
+        ListBook:
+          Type: Api
+          Properties:
+            Path: /books/
+            Method: get
+            RestApiId:
+              Ref: BookApi
+
+  BookCreate:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: fcj-book-shop/book_create
+      Handler: book_create.lambda_handler
+      Runtime: python3.9
+      FunctionName: book_create
+      Architectures:
+        - x86_64
+      Policies:
+        - Statement:
+            - Sid: AccessDynamoDB
+              Effect: Allow
+              Action:
+                - dynamodb:PutItem
+              Resource:
+                - !GetAtt BooksTable.Arn
+            - Sid: BookCreateItem
+              Effect: Allow
+              Action:
+                - s3:PutObject
+              Resource: !Join
+                - ""
+                - - "arn:aws:s3:::"
+                  - !Ref BookImageShop
+                  - /*
+      Events:
+        CreateBook:
+          Type: Api
+          Properties:
+            Path: /books/
+            Method: post
+            RestApiId:
+              Ref: BookApi
+      Environment:
+        Variables:
+          BUCKET_SOURCE: !Ref BookImageShop
+          BUCKET_DES: !Ref BookImageResizeShop
+
+  BookDelete:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: fcj-book-shop/book_delete
+      Handler: book_delete.lambda_handler
+      Runtime: python3.9
+      FunctionName: book_delete
+      Architectures:
+        - x86_64
+      Policies:
+        - Statement:
+            - Sid: VisualEditor0
+              Effect: Allow
+              Action:
+                - dynamodb:DeleteItem
+                - dynamodb:GetItem
+                - dynamodb:Query
+                - s3:DeleteObject
+              Resource:
+                - !GetAtt BooksTable.Arn
+            - Sid: VisualEditor1
+              Effect: Allow
+              Action:
+                - s3:DeleteObject
+              Resource: !Join
+                - ""
+                - - "arn:aws:s3:::"
+                  - !Ref BookImageResizeShop
+                  - /*
+      Events:
+        DeleteBook:
+          Type: Api
+          Properties:
+            Path: /books/{id}
+            Method: delete
+            RestApiId:
+              Ref: BookApi
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BookImageResizeShop
+
+  BookImageResizeShopPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref BookImageResizeShop
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Principal: "*"
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref BookImageResizeShop
+                - /*
+
+  ImageResizer:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: fcj-book-shop/resize_image/function.zip
+      PackageType: Zip
+      Handler: index.handler
+      Runtime: nodejs16.x
+      FunctionName: resize_image
+      Architectures:
+        - x86_64
+      Policies:
+        - Statement:
+            - Sid: ResizeUploadImage
+              Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:PutObject
+                - s3:DeleteObject
+              Resource:
+                - !Join
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - !Ref BookImageResizeShop
+                    - /*
+                - !Join
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - !Ref S3ImageShopName
+                    - /*
+      Events:
+        ResizeImage:
+          Type: S3
+          Properties:
+            Bucket: !Ref BookImageShop
+            Events: s3:ObjectCreated:*
+      Environment:
+        Variables:
+          WIDTH: 200
+          HEIGHT: 280
+          DES_BUCKET: !Ref BookImageResizeShop
+
+  LambdaInvokePermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      FunctionName: !GetAtt ImageResizer.Arn
+      Action: "lambda:InvokeFunction"
+      Principal: "s3.amazonaws.com"
+      SourceAccount: !Sub ${AWS::AccountId}
+      SourceArn: !GetAtt BookImageShop.Arn
+
+  Login:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: login
+      CodeUri: fcj-book-shop/login
+      Handler: login.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          CLIENT_ID: "5j2hl9vgr3avcldtvf6avr9fab"
+      Events:
+        Login:
+          Type: Api
+          Properties:
+            Path: /login/
+            Method: post
+            RestApiId:
+              Ref: BookApi
+
+  Register:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: register
+      CodeUri: fcj-book-shop/register
+      Handler: register.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          CLIENT_ID: "5j2hl9vgr3avcldtvf6avr9fab"
+      Events:
+        Register:
+          Type: Api
+          Properties:
+            Path: /register/
+            Method: post
+            RestApiId:
+              Ref: BookApi
+
+  ConfirmUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: confirm_user
+      CodeUri: fcj-book-shop/confirm_user
+      Handler: confirm_user.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          CLIENT_ID: "5j2hl9vgr3avcldtvf6avr9fab"
+      Events:
+        ConfirmUser:
+          Type: Api
+          Properties:
+            Path: /confirm_user/
+            Method: post
+            RestApiId:
+              Ref: BookApi
+
+  BookApi:
+    Type: AWS::Serverless::Api
+    Name: fcj-serverless-api
+    Properties:
+      StageName: staging
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS,DELETE'"
+        AllowHeaders: "'content-type'"
+        AllowOrigin: "'*'"
+      DefinitionBody:
+        openapi: 3.0.1
+        info:
+          description: "This is the APIs for book shop web app"
+          version: "1.0.0"
+          title: "API Gateway REST API to Lambda"
+        paths:
+          /books:
+            get:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BooksList.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+            post:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookCreate.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+          /books/{id}:
+            delete:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+          /login:
+            post:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Login.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+          /register:
+            post:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Register.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+          /confirm_user:
+            post:
+              responses:
+                "200":
+                  description: 200 response
+                  headers:
+                    Access-Control-Allow-Origin:
+                      type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ConfirmUser.Arn}/invocations"
+                responses:
+                  default:
+                    statusCode: 200
+                    responseParameters:
+                      method.response.header.Access-Control-Allow-Origin: "'*'"
+                passthroughBehavior: when_no_match
+                httpMethod: POST #always POST
+                type: aws_proxy
+      BinaryMediaTypes:
+        - multipart~1form-data
